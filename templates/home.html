@@ -1,0 +1,65 @@
+{% extends 'base.html' %}
+
+{% block title  %}
+Home
+{% endblock title  %}
+
+{% block body %}
+
+<div class="container mt-5">
+  <div class="row">
+      <div class="col-md-4"></div>
+        
+{% with messages=get_flashed_messages(with_categories=true)%}
+{% if messages %}
+{% for category, message in messages %}
+<div class="alert alert-{{category}} alert-dismissible fade show" role="alert">
+{{message}}  
+<button type="button" class="close col-top" data-dismiss="alert" aria-label="Close">
+    <span aria-hidden="true">&times;</span>
+  </button>
+  {% endfor %}
+  {% endif %}
+  {% endwith %}
+  <div class="col-md-4"></div>
+</div>
+</div>  
+
+  <div class="container mt-5">
+    <div class="row">
+        <div class="col-md-1"></div>
+        <div class="col-md-4">
+        <br>
+        <div class="card" style="width: 18rem;">
+          <img class="card-img-top"  src=" static/temp1.jpg " alt="">
+          <div class="card-body">
+            <h5 class="card-title">Inventory</h5>
+            <p class="card-text">Today : {% for posts in query1 %}
+              {{posts.mrp}} ₹
+              {% endfor %}</p>
+            <a href="/addinventory" class="btn btn-primary">ADD Inventory</a>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-1"></div>
+        <div class="col-md-4">
+        <br>
+        <div class="card" style="width: 18rem;">
+          <img class="card-img-top" src="static/temp2.jpg" alt="Card image cap">
+          <div class="card-body">
+            <h5 class="card-title">Sales</h5>
+            <p class="card-text">Today : {% for post in query %}
+                {{post.totalcost}} ₹
+                {% endfor %}
+              </p>
+            <a href="/addsales" class="btn btn-primary">ADD SALES</a>
+          </div>
+        </div>
+      </div>
+    </div>
+    </div>
+  </div>       
+  
+ 
+{% endblock body  %}
+

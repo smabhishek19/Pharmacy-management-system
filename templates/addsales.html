@@ -1,0 +1,74 @@
+{% extends 'base.html' %}
+{% block title  %}
+Add Sales
+{% endblock title  %}
+{% block body %}
+<div class="container mt-5">
+   <div class="row">
+      <div class="col">
+         <h4 class="text text-lg bg-primary text-light col-md-12">Enter Sales</h4>
+         <br>
+         {% with messages=get_flashed_messages(with_categories=true) %}
+         {% if messages %}
+         {% for category, message in messages %}
+         <div class="alert alert-{{category}} alert-dismissible fade show" role="alert">
+            {{message}}
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+            </button>
+         </div>
+      </div>
+      {%  endfor %}
+      {%   endif %}
+      {% endwith %} 
+      <form action="/addsales" method="post" class="jumbotron bg-dark text-light">
+      <div class="row">
+         <form class="jumbotron col-md-12">
+            <div class="row">
+              <div class="forum-group col-md-3 ">
+                <label for="customername" class="form-label">Customer Name</label>
+                <input type="username" class="form-control" id="cname" name="cname" Required>
+             </div>
+             <div class="forum-group col-md-3 ">
+              <label for="customerphone" class="form-label">Customer Ph.no</label>
+              <input type="phone" class="form-control" id="cphone" name="cphone" Required>
+           </div> 
+              
+              <div class="forum-group col-md-3 ">
+                  <label for="productname" class="form-label">Product Name</label>
+                  <input type="username" class="form-control" id="productname" name="pname" Required>
+               </div>
+               <div class="form-group col-md-3">
+                  <label for="sdate" class="form-label">Sale date</label>
+                  <input type="date" class="form-control" id="sdate" name="sdate" Required>
+               </div>
+               <div class="form-group col-md-3">
+                  <label for="quantity" class="form-lable">Quantity (in one box)</label>
+                  <input type="number" class="form-control" id="quantity" name="quantity">
+               </div>
+               <div class="form-group col-md-3">  
+                  <label for="mrp" class="form-label">MRP (for one)</label>
+                  <input type="mrp" class="form-control" id="mrp" name="mrp" required>
+               </div>
+               <div class="container mt-4">
+               <div class="col-md-0"></div>
+               <div class="col-md-3">
+                <button type="submit" class="btn btn-success btn-sm btn-block">ADD</button>
+               </div>
+              </div>
+            </div>
+            
+      </div>
+   </div>
+</div>
+</form>
+<br>
+
+
+
+<br>
+
+
+<br>
+</div>
+{% endblock body %}

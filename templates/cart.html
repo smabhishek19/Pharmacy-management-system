@@ -1,0 +1,81 @@
+{% extends 'base.html' %}
+
+{% block title  %}
+Confsales
+{% endblock title  %}
+
+{% block body %}
+<br>
+<h4 class="text-center bg-dark text-white">Cart</h4>
+<br>
+{% with messages=get_flashed_messages(with_categories=true) %}
+{% if messages %}
+{% for category, message in messages %}
+
+
+    <div class="alert alert-{{category}} alert-dismissible fade show" role="alert">
+      {{message}}
+  
+    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+{% endfor %}
+{% endif %}
+{% endwith %}
+
+<div calss="container mt-3">
+  <div class="row">
+     <div class="col-md-3"></div>
+     <div class="col-md-6">
+        <div class="table-wrapper-scroll-y my-custom-scrollbar">
+         <table class="table w-auto">
+           <thead class="thead-light">
+              <tr>
+                  <th scope="col">pname</th>
+                  <th scope="col">quantity</th>
+                  <th scope="col">mrp</th>
+                  <th scope="col">EDIT</th>
+                  <th scope="col">DELETE</th>
+                </tr>
+           </thead>
+    
+            <tbody>
+            {% for post in query %}
+            <tr>
+              <th scope="row">{{post.pname}}</th>
+
+              <td>{{post.quantity}}</td>
+               <td>{{post.totalcost}}</td>
+              <td><a href="/cartedit/{{post.sid}}/{{post.pname}}"><button class="btn btn-primary">Edit </button> </a> </td>
+              <td><a href="/cartdelete/{{post.sid}}/{{post.pname}}/{{post.totalcost}}"><button onclick="return confirm('Are you sure to Delete data');" class="btn btn-danger">Delete </button> </a> </td>
+              </tr>
+            {% endfor %}
+
+            </table>
+        </div>    
+    </div>  
+</div>
+</div>
+
+<div classs="container mt-3">
+    <div class="row">
+       <div class="col-md-3"></div>
+       <div class="col-md-6">
+     <div class="col-md-4">
+        <a href="/addproduct" class="btn btn-primary">+ ADD product</a>
+     </div>
+     
+     
+     <div class="col-md-2"></div>
+     <br>
+     <div class="form-group  col-md-6">
+      <label for="disname" class="form-label bg=info">Total Cost {{cost}}</label>
+    </div> 
+    <div class="col-md-4">
+      <a href="/home"><button class="btn btn-danger"> Confirm </button> </a>
+      </div>
+</div>
+</div> 
+</div>
+ {% endblock body %}

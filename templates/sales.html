@@ -1,0 +1,88 @@
+{% extends 'base.html' %}
+
+{% block title  %}
+Sales
+{% endblock title  %}
+
+{% block body %}
+<br>
+<h4 class="text-center bg-dark text-white">Recent Sales</h4>
+<div class="row">
+  <div class="col-md-9"></div>
+  <div class="col-md-2">
+<div class="dropdown">
+  <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+    Filter
+  </button>
+  <div class="dropdown-menu" aria-labelledby="Today">
+    <a class="dropdown-item" href="/sales/{{'all'}}">All</a>
+    <a class="dropdown-item" href="/sales/{{'today'}}">Today</a>
+    <a class="dropdown-item" href="/sales/{{'month'}}">from one month</a>
+    <a class="dropdown-item" href="/sales/{{'preyear'}}">previous year</a>
+  </div>
+</div>
+</div>
+</div>
+
+<br>
+{% with messages=get_flashed_messages(with_categories=true) %}
+{% if messages %}
+{% for category, message in messages %}
+
+
+    <div class="alert alert-{{category}} alert-dismissible fade show" role="alert">
+      {{message}}
+  
+    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+{% endfor %}
+{% endif %}
+{% endwith %}
+
+<div calss="container mt-3">
+  <div class="row">
+     <div class="col-md-3"></div>
+     <div class="col-md-6">
+        <div class="table-wrapper-scroll-y my-custom-scrollbar">
+         <table class="table w-auto">
+           <thead class="thead-light">
+              <tr>
+                 <th scope="col">SID</th>
+                 <th scope="col">date</th>
+                 <th scope="col">pname</th>
+                 <th scope="col">quantity</th>
+                 <th scope="col">total</th>
+                  <th scope="col">Customer Name</th>
+                </tr>
+           </thead>    
+            <tbody>
+            {% for post in query %}
+             <tr>
+             <th scope="row">{{post.sid}}</th>
+             <td>{{post.sdate}}</td>
+             <td>{{post.pname}}</td>
+               <td>{{post.quantity}}</td>
+              <td>{{post.totalcost}}</td>
+             <td>{{post.cname}}</td>        
+             </tr>
+            {% endfor %}
+
+            </table>
+        </div>    
+    </div>  
+</div>
+</div>
+
+<div classs="container mt-3">
+    <div class="row">
+       <div class="col-md-3"></div>
+       <div class="col-md-6">
+     <div class="col-md-4">
+        <a href="/addsales" class="btn btn-primary">ADD Sales</a>
+ </div>
+</div>
+</div>
+</div>
+{% endblock body %}

@@ -1,0 +1,107 @@
+{% extends 'base.html' %}
+
+{% block title  %}
+edit
+{% endblock title  %}
+
+{% block body %}
+
+<div class="container mt-5">
+    <div class="row">
+    <div class="col-md-3"></div>
+    <div class="col-md-6">
+    
+    <h4 class="text-center text-lg bg-info  text-dark ">Enter Inventory</h4>
+    <br>
+    
+    
+    {% with messages=get_flashed_messages(with_categories=true) %}
+    {% if messages %}
+    {% for category, message in messages %}
+    
+    <div class="alert alert-{{category}} alert-dismissible fade show" role="alert">
+        {{message}}
+    
+      <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    
+    
+      {% endfor %}
+      {% endif %}
+      {% endwith %}
+    
+    
+    
+    <form action="/edit/{{posts.pid}}" method="post" class="jumbotron">
+    
+        <div class="forum-group">
+            <label for="productname" class="form-label">Product Name</label>
+            <input type="username" class="form-control" id="productname" value={{posts.pname}} name="pname" Required>
+        </div>
+        <br>
+        <div class="row">
+            <div class="form-group col-md-6">
+             <label for="quantity" class="form-lable"> Quantity(in one box)</label>
+                <input type="number" class="form-control" id="quantity" value={{posts.quantity}} name="quantity">
+            </div>
+            <div class="form-group col-md-4">
+                <label for="type">Type</label>
+                <select id="type" class="form-control" name="type">
+                  <option selected>{{posts.type}}</option>
+                  <option value="Tablets">Tablets</option>
+                  <option value="Syrup">Syrup</option>
+                  <option value="other">other</option>
+                </select>
+            </div>
+                    
+        </div>
+    
+        
+    
+      <div class="form-group">
+            <label for="expdate" class="form-label">Expiry date</label>
+            <input type="date" class="form-control" id="expdate" value={{posts.expdate}} name="expdate" Required>
+       </div>
+        
+      <div class="row">
+            <div class="form-group col-md-6">    
+                <label for="fprice" class="form-label">Final price</label>
+                <input type="cost" class="form-control" id="fprice" value={{posts.fprice}} name="fprice" required>
+            </div>
+             <div class="form-group col-md-4">  
+                <label for="mrp" class="form-label">MRP</label>
+                <input type="mrp" class="form-control" id="mrp" value={{posts.mrp}} name="mrp" required>
+             </div>     
+        </div>     
+        
+    
+        <div class="form-group">
+            <label for="pdate" class="form-label">Purchase date</label>
+            <input type="date" class="form-control" id="pdate" value={{posts.pdate}} name="pdate" Required>
+       </div>
+    
+      <div class="form-group">
+        <label for="disname" class="form-label">Distributor Name</label>
+        <input type="text" class="form-control" id="disname" name="disname" value={{posts.disname}} placeholder="Name
+        " required>
+      </div> 
+    
+    
+    
+      <br>
+      <button type="submit" class="btn btn-success btn-lg btn-block" >ADD</button>
+    </form>
+    
+    </div>
+    
+    
+    </div>
+    
+    
+    
+    </div>
+    
+    {% endblock body %}
+    

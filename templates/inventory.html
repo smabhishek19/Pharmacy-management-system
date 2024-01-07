@@ -1,0 +1,95 @@
+{% extends 'base.html' %}
+
+{% block title  %}
+Inventory
+{% endblock title  %}
+
+{% block body %}
+<br>
+<h4 class="text-center bg-dark text-white">Recent Inventory</h4>
+<div class="row">
+  <div class="col-md-9"></div>
+  <div class="col-md-2">
+<div class="dropdown">
+  <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+    Filter
+  </button>
+  <div class="dropdown-menu" aria-labelledby="Today">
+    <a class="dropdown-item" href="/inventory/{{'all'}}">All</a>
+    <a class="dropdown-item" href="/inventory/{{'today'}}">Today</a>
+    <a class="dropdown-item" href="/inventory/{{'month'}}">from one month</a>
+    <a class="dropdown-item" href="/inventory/{{'preyear'}}">previous year</a>
+  </div>
+</div>
+</div>
+</div>
+<br>
+{% with messages=get_flashed_messages(with_categories=true) %}
+{% if messages %}
+{% for category, message in messages %}
+
+
+    <div class="alert alert-{{category}} alert-dismissible fade show" role="alert">
+      {{message}}
+  
+    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+{% endfor %}
+{% endif %}
+{% endwith %}
+
+<div calss="container mt-3">
+  <div class="row">
+     <div class="col-md-3"></div>
+     <div class="col-md-6">
+        <div class="table-wrapper-scroll-y my-custom-scrollbar">
+         <table class="table w-auto">
+           <thead class="thead-light">
+              <tr>
+                 <th scope="col">PID</th>
+                 <th scope="col">pname</th>
+                 <th scope="col">quantity</th>
+                 <th scope="col">fprice</th>
+                  <th scope="col">mrp</th>
+                  <th scope="col">pdate</th>
+                  <th scope="col">Distributor Name</th>
+                  <th scope="col">EDIT</th>
+                  <th scope="col">DELETE</th>
+                </tr>
+           </thead>
+    
+            <tbody>
+            {% for post in query %}
+             <tr>
+             <th scope="row">{{post.pid}}</th>
+             <td>{{post.pname}}</td>
+             <td>{{post.quantity}}</td>
+               <td>{{post.fprice}}</td>
+              <td>{{post.mrp}}</td>
+             <td class="col-md-5">{{post.pdate}}   </td>
+             <td>{{post.disname}}</td>
+        
+             <td><a href="/edit/{{post.pid}}"><button class="btn btn-primary">Edit </button> </a> </td>
+             <td><a href="/delete/{{post.pid}}"><button onclick="return confirm('Are you sure to Delete data');" class="btn btn-danger">Delete </button> </a> </td>
+             </tr>
+            {% endfor %}
+
+            </table>
+        </div>    
+    </div>  
+</div>
+</div>
+
+<div classs="container mt-3">
+    <div class="row">
+       <div class="col-md-3"></div>
+       <div class="col-md-6">
+     <div class="col-md-4">
+        <a href="/addinventory" class="btn btn-primary">ADD Inventory</a>
+ </div>
+</div>
+</div>
+</div>
+ {% endblock body %}
